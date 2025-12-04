@@ -172,3 +172,4 @@ while True: #Running an infinite till the collision occurs and then game ends
 
 turtle.Terminator()
 
+
