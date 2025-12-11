@@ -1,175 +1,95 @@
-# python-snake-game
-import turtle
-import random
-import time
+JUDUL UTAMA:
+Python Snake Game
 
-delay=0.1
-score = 0
-high_score = 0
+PENDAHULUAN
+Aplikasi Snake Game ini dibuat sebagai hiburan dan dibuat menggunakan Python dengan modul turtle, random, dan time. Game ini mensimulasikan pergerakan ular dalam sebuah arena dengan tujuan mengumpulkan makanan dan meningkatkan skor. Setiap bagian program memiliki fungsi penting untuk menciptakan gameplay yang responsif dan interaktif
 
-# Creating the window and setting height and width
-wn = turtle.Screen()
-wn.title("TechVidan's Snake Game")
-wn.bgcolor("black")
-wn.setup(width=700, height=700)
-wn.tracer(0)
+PANDUAN INSTALASI:
+1. Menginstal dan Menyiapkan Python
+Untuk menjalankan program Snake Game berbasis Turtle, kamu harus memiliki Python versi
+3.x. Python dapat diunduh dari situs resmi Python. maka Python sudah terinstal.
+2. Membuat Folder Kerja
+Buat folder baru untuk menyimpan program Snake Game. Contoh nama folder:
+SnakeGame. Folder ini bebas kamu buat di mana saja, misalnya di Desktop atau Documents.
+3. Membuat File Program Python
+Setelah folder siap, buat file .py untuk menampung kode program. Caranya:
+1. Buka aplikasi editor seperti: Visual Studio Code (disarankan), IDLE Python
+2. Buat file baru.
+3. Salin seluruh kode Snake Game yang sudah kamu berikan sebelumnya.
+4. Simpan dengan nama: snake_game.py
+Pastikan file disimpan dalam folder SnakeGame
+4. Mengecek Modul yang Diperlukan
+Program kamu menggunakan tiga modul Python: turtle, random, time. Semua modul tersebut
+sudah tersedia secara default pada Python. Jadi, kamu tidak perlu menginstal apa pun
 
-# Creating a border for the game
-turtle.speed(5)
-turtle.pensize(4)
-turtle.penup()
-turtle.goto(-310,250)
-turtle.pendown()
-turtle.color('black')
-turtle.forward(600)
-turtle.right(90)
-turtle.forward(500)
-turtle.right(90)
-turtle.forward(600)
-turtle.right(90)
-turtle.forward(500)
-turtle.penup()
-turtle.hideturtle()
+PANDUAN MENJALANKAN PROGRAM
+Ada dua cara utama untuk menjalankan file Python tersebut.
 
-# Creating head of the snake
-head = turtle.Turtle()
-head.speed(0)
-head.shape("square")
-head.color("white")
-head.penup()
-head.goto(0, 0)
-head.direction = "stop"
+A. Menjalankan Melalui Command Prompt (CMD)
+1. Buka Command Prompt.
+2. Arahkan CMD ke folder SnakeGame.
+Contoh perintah jika folder berada di Desktop:
+cd C:\Users\NamaUser\Desktop\SnakeGame
+3. Jalankan program dengan perintah: python snake_game.py
+Jika Python terdeteksi, jendela game akan muncul otomatis.
 
-# Creating food in the game
-food = turtle.Turtle()
-food_color = random.choice(['yellow', 'green', 'tomato'])
-food_shape = random.choice(['triangle', 'circle', 'square'])
-food.speed(0)
-food.shape(food_shape)
-food.color(food_color)
-food.penup()
-food.goto(20, 20)
+B. Menjalankan Melalui Visual Studio Code
+1. Jalankan VS Code.
+2. Klik File → Open Folder → pilih folder SnakeGame.
+3. Klik file snake_game.py.
+4. Tekan tombol Run (ikon segitiga ►) di kanan atas.
+Atau tekan F5 pada keyboard.
+Jendela Turtle akan muncul dan game langsung berjalan.
 
-# Creating space to show score and high score
-scoreBoard = turtle.Turtle()
-scoreBoard.speed(0)
-scoreBoard.shape("square")
-scoreBoard.color("white")
-scoreBoard.penup()
-scoreBoard.hideturtle()
-scoreBoard.goto(0, 250)
-scoreBoard.write("Score : 0 High score : 0", align="center",
-        font=("Courier", 25, "bold"))
+Dokumentasi Teknis Flowchart
+```mermaid
+flowchart TD
+   A([Start]) --> B[Inisialisasi Window & Variabel]
+   B --> C[Inisialisasi Border Permainan]
+   C --> D[Inisialisasi Head Snake]
+   D --> E[Inisialisasi Food (random warna & bentuk)]
+   E --> F[Inisialisasi Scoreboard]
+   F --> G[Set Key Input (Up/Down/Left/Right)]
+   G --> H{Mulai Loop Utama}
 
+   %% LOOP UTAMA
+   H --> I[Update Layar]
 
-# sssigning key directions
-def move_up():
-    if head.direction != "down":
-        head.direction = "up"
+   %% CEK TABRAKAN DINDING
+   I --> J{Snake\nmenabrak dinding?}
+   J -->|Ya| K([GAME OVER]\nTampilkan skor)
+   J -->|Tidak| L[Cek apakah head menyentuh food]
 
+   %% CEK MAKAN FOOD
+   L --> M{Distance < 20?}
+   M -->|Ya| N[Tambah score\nUpdate high score]
+   N --> O[Generate food baru (posisi & warna random)]
+   O --> P[Tambah segment baru]
+   P --> Q[Update scoreboard]
+   Q --> R[Gerakkan ekor snake]
+   M -->|Tidak| R
 
-def move_down():
-    if head.direction != "up":
-        head.direction = "down"
+   %% PERGERAKAN SNAKE
+   R --> S[Gerakkan head sesuai arah]
 
+   %% CEK TABRAKAN BADAN
+   S --> T{Head menabrak badan?}
+   T -->|Ya| K
+   T -->|Tidak| U[time.sleep(delay)]
 
-def move_left():
-    if head.direction != "right":
-        head.direction = "left"
+   U --> H
 
+   %% END
+   K --> V([End])
+```
 
-def move_right():
-    if head.direction != "left":
-        head.direction = "right"
-
-
-def move():
-    if head.direction == "up":
-        y = head.ycor()
-        head.sety(y+20)
-    if head.direction == "down":
-        y = head.ycor()
-        head.sety(y-20)
-    if head.direction == "left":
-        x = head.xcor()
-        head.setx(x-20)
-    if head.direction == "right":
-        x = head.xcor()
-        head.setx(x+20)
+Kontributor
+Kontributor
+| No | Nama Lengkap | NIM | Akun GitHub | Peran |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 | Joy Pua  | 250211060120  | (https://github.com/p4seppp)  | Project Maintainer  |
+| 2 | Junior Palilingan Jacobis  | 250211060129  | (https://github.com/juniorjac496-max/jun.git)  | Contributor  |
+| 3 | Gamaliel Calvyn Hizkia Kaligis  | 250211060123  | (https://github.com/praisemandolang)  | Contributor  |
 
 
-wn.listen()
-wn.onkeypress(move_up, "Up")
-wn.onkeypress(move_down, "Down")
-wn.onkeypress(move_left, "Left")
-wn.onkeypress(move_right, "Right")
-
-segments = []
-
-# Main Game
-while True: #Running an infinite till the collision occurs and then game ends
-    wn.update()
-
-    #Ending the game on collision with any of the walls
-    if head.xcor() > 289 or head.xcor() < -300 or head.ycor() > 240 or head.ycor() < -240:
-        time.sleep(1)
-        wn.clear()
-        wn.bgcolor('blue')
-        scoreBoard.goto(0,0)
-        scoreBoard.write("GAME OVER\n Your score is : {}".format(
-            score), align="center", font=("Courier", 30, "bold"))
-    
-
-    #If snake collects food
-    if head.distance(food) < 20:
-        #increasing score and updating the high_score if required
-        score += 10
-        if score > high_score:
-            high_score= score
-        scoreBoard.clear()
-        scoreBoard.write("Score : {} High Score : {} ".format(
-            score, high_score), align="center", font=("Courier", 25, "bold"))
-        
-        #creating a food at random collection
-        x_cord = random.randint(-290, 270)
-        y_cord = random.randint(-240, 240)
-        food_color = random.choice(['yellow', 'green', 'tomato'])
-        food_shape = random.choice([ 'triangle', 'circle', 'square'])
-        food.speed(0)
-        food.shape(food_shape)
-        food.color(food_color)
-        food.goto(x_cord, y_cord)
-
-        # Adding a new segment to the snake
-        new_segment = turtle.Turtle()
-        new_segment.speed(0)
-        new_segment.shape("square")
-        new_segment.color("white smoke") # giving a new color to the tail
-        new_segment.penup()
-        segments.append(new_segment) #adding the segment to the list
-
-    # Moving the snake and ending the game on collisions of head with body segments
-    for i in range(len(segments)-1, 0, -1):
-        x = segments[i-1].xcor()
-        y = segments[i-1].ycor()
-        segments[i].goto(x, y)
-    if len(segments) > 0:
-        x = head.xcor()
-        y = head.ycor()
-        segments[0].goto(x, y)
-    move()
-
-    #Checking for collision with the body
-    for segment in segments:
-        if segment.distance(head) < 20:
-            time.sleep(1)
-            wn.clear()
-            scoreBoard.goto(0,0)
-            scoreBoard.write("\t\tGAME OVER\n Your Score is : {}".format(
-            score), align="center", font=("Courier", 30, "bold",))
-
-    time.sleep(delay)
-
-
-turtle.Terminator()
-
+  
